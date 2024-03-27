@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './AuthPage.css'
-import authImage from '../../Assets/ground.jpg'
+import authImage from '@assets/ground.jpg'
 import LoginBox from '../../Components/AuthBox/LoginBox'
 import SignUpBox from '../../Components/AuthBox/SignUpBox'
 

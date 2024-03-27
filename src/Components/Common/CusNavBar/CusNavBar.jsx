@@ -1,4 +1,5 @@
 import React from 'react'
+import './CusNavBar.css'
 
 function CusNavBar(){
   return(
@@ -10,7 +11,7 @@ function CusNavBar(){
       <span className="navbar-toggler-icon"></span>
     </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul className="navbar-nav me-auto  mb-lg-0">
         <li className="nav-item">
           Home
         </li>
@@ -19,14 +20,13 @@ function CusNavBar(){
         </li>
         </ul>
         <div className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-            Dropdown
-          </a>
-          <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a className="dropdown-item" href="#">Action</a></li>
-            <li><a className="dropdown-item" href="#">Another action</a></li>
-            <li><a className="dropdown-divider"></a></li>
-            <li><a className="dropdown-item" href="#">Something else here</a></li>
+          <span className="nav-link dropdown-toggle user-drop-down"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+            User
+          </span>
+          <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <li><span className="dropdown-item">Action</span></li>
+            <li><span className="dropdown-item">Another action</span></li>
+            <li><span className="dropdown-item">Something else here</span></li>
           </ul>
         </div>
              
