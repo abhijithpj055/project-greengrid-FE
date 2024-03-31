@@ -3,14 +3,19 @@ import './LoginBox.css'
 import CustomInput from '../Common/CustomInput/CustomInput'
 import { errorToast, successToast } from '../../Plugins/Toast/Toast'
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { showorhideLoader } from '../../Redux/GeneralSlice'
 
 function SignUpBox({setBoxType}) {
   const [signupData,setSignupData]=useState({})
+  const {showLoader}=useSelector((store=>store.general))
+  const dispatch=useDispatch()
   const handleChange=(e)=>{
     setSignupData({...signupData,[e.target.name]:e.target.value})
   }
 
   const doSignup=()=>{
+    dispatch(showorhideLoader(true))
     if(signupData.password===signupData.confirmPassword){
 
       axios({
@@ -20,9 +25,11 @@ function SignUpBox({setBoxType}) {
       }).then((res)=>{
         successToast(res.message)
         setBoxType('login')
+        dispatch(showorhideLoader(false))
 
       })
       .catch((err)=>{
+        dispatch(showorhideLoader(false))
         errorToast(err?.response?.data.message || 'something went to wrong')
 
       })

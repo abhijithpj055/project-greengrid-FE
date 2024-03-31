@@ -4,9 +4,13 @@ import CustomInput from '../Common/CustomInput/CustomInput'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { errorToast, successToast } from '../../Plugins/Toast/Toast'
+import { setUserData } from '../../Redux/UserSlice'
+import { useDispatch } from 'react-redux'
+import { showorhideLoader } from '../../Redux/GeneralSlice'
 
 function LoginBox({setBoxType}) {
   const [loginData,setLoginData]=useState({})
+  const dispatch=useDispatch()
   const navigate=useNavigate()
 
   const handleLogin=(e)=>{
@@ -14,6 +18,7 @@ function LoginBox({setBoxType}) {
   }
 
    const doLogin=()=>{
+    dispatch(showorhideLoader(true))
      axios({
       method:'POST',
       url:process.env.REACT_APP_BASE_URL+'/auth/dologin',
@@ -21,11 +26,15 @@ function LoginBox({setBoxType}) {
     }).then((res)=>{
 
       localStorage.setItem('token',res.data.token)
-      successToast(res.message)
+      localStorage.setItem('user',JSON.stringify(res.data.user))
+      dispatch(setUserData(res.data.user))
        navigate('/home')
+       dispatch(showorhideLoader(false))
+       successToast(res.message)
 
     })
      .catch((err)=>{
+      dispatch(showorhideLoader(false))
        errorToast(err?.response?.data.message || 'something went to wrong')
 
     })
